@@ -1,0 +1,93 @@
+<ui:composition
+        xmlns:h="jakarta.faces.html"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+      <ui:include src="includes/head.xhtml"/>
+        <title>
+          <ui:insert>Dashboard</ui:insert>
+        </title>
+    </h:head>
+    <h:body class="section-bg">
+      <ui:include src="includes/loader.xhtml"/>
+      <ui:include src="includes/side-bar.xhtml"/>
+
+
+        <!-- ================================
+        START DASHBOARD AREA
+    ================================= -->
+        <section class="dashboard-area">
+          <ui:include src="includes/top-bar.xhtml"/>
+          <!-- end dashboard-nav -->
+          <div class="dashboard-content-wrap">
+            <div class="dashboard-bread dashboard-bread-2">
+              <div class="container-fluid">
+                <div class="row align-items-center">
+                  <div class="col-lg-6">
+                    <div class="breadcrumb-content">
+                      <div class="section-heading">
+                        <h2 class="sec__title font-size-30 text-white">
+                          Dashboard
+                        </h2>
+                      </div>
+                    </div>
+                    <!-- end breadcrumb-content -->
+                  </div>
+                  <!-- end col-lg-6 -->
+                  <div class="col-lg-6">
+                    <div class="breadcrumb-list text-end">
+                      <ul class="list-items">
+                        <li><h:link outcome="index.html" styleClass="text-white">Home</h:link></li>
+                        <li>Pages</li>
+                        <li>Dashboard</li>
+                      </ul>
+                    </div>
+                    <!-- end breadcrumb-list -->
+                  </div>
+                  <!-- end col-lg-6 -->
+                </div>
+                <!-- end row -->
+
+                <!-- end row -->
+              </div>
+            </div>
+            <!-- end dashboard-bread -->
+            <div class="dashboard-main-content">
+              <div class="container-fluid">
+                <ui:insert>
+
+                </ui:insert>
+              </div>
+              <!-- end container-fluid -->
+            </div>
+            <!-- end dashboard-main-content -->
+          </div>
+          <!-- end dashboard-content-wrap -->
+        </section>
+        <!-- end dashboard-area -->
+        <!-- start scroll top -->
+        <div id="back-to-top">
+          <i class="la la-angle-up" title="Go top"></i>
+        </div>
+        <!-- end scroll top -->
+
+        <!-- Template JS Files -->
+        <script src="#{resource['js/jquery-3.7.1.min.js']}"></script>
+        <script src="#{resource['js/jquery-ui.js']}"></script>
+        <script src="#{resource['js/bootstrap.bundle.min.js']}"></script>
+        <script src="#{resource['js/select2.min.js']}"></script>
+        <script src="#{resource['js/moment.min.js']}"></script>
+        <script src="#{resource['js/daterangepicker.js']}"></script>
+        <script src="#{resource['js/owl.carousel.min.js']}"></script>
+        <script src="#{resource['js/jquery.fancybox.min.js']}"></script>
+        <script src="#{resource['js/jquery.countTo.min.js']}"></script>
+        <script src="#{resource['js/animated-headline.js']}"></script>
+        <script src="#{resource['js/jquery.sparkline.js']}"></script>
+        <script src="#{resource['js/dashboard.js']}"></script>
+        <script src="#{resource['js/chart.js']}"></script>
+        <script src="#{resource['js/chart.extension.js']}"></script>
+        <script src="#{resource['js/bar-chart.js']}"></script>
+        <script src="#{resource['js/line-chart.js']}"></script>
+        <script src="#{resource['js/jquery.ripples-min.js']}"></script>
+        <script src="#{resource['js/main.js']}"></script>
+      </h:body>
+</ui:composition>

@@ -1,0 +1,41 @@
+<ui:composition xmlns:h="jakarta.faces.html" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <ui:include src="includes/head.xhtml"/>
+    </h:head>
+    <h:body>
+        <ui:include src="includes/loader.xhtml"/>
+        <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center pe-4 ps-4">
+                <div class="card col-lg-4 col-md-6 col-sm-8 shadow ">
+                    <div class="d-flex flex-column align-items-center pt-3">
+                        <h:graphicImage styleClass="logo-login" value="#{resource['img/logo.png']}"/>
+                        <h4 class="pt-1 font-weight-bold">BizTrak App</h4>
+                    </div>
+                    <div class="card-body">
+                        <h:form styleClass="d-flex flex-column align-items-center">
+                            <div class="form-group w-100 mt-2">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <i class="la la-user la-norm"></i>
+                                    <h:outputLabel styleClass="m-0 p-0" for="identifiant" value="Identifiant"/>
+                                </div>
+                                <h:inputText type="email" styleClass="form-control" id="identifiant" placeholder="example@example.example"/>
+                            </div>
+                            <div class="form-group w-100">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <i class="la la-lock la-norm"></i>
+                                    <h:outputLabel styleClass="m-0 p-0" for="password" value="Mot de passe"/>
+                                </div>
+                                <h:inputSecret id="password" styleClass="form-control"  />
+                            </div>
+                            <div class="form-group w-100 pt-2">
+                              <h:commandButton styleClass="btn btn-primary w-100 rounded-2" action="#{loginBean.lgoin}" value="Se Connecter" />
+                            </div>
+
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ui:include src="includes/foot.xhtml"/>
+    </h:body>
+</ui:composition>

@@ -1,0 +1,14 @@
+body{
+    background-color: #eff1f6;
+}
+.logo-login{
+    width: 80px;
+}
+.f-mc{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.la-norm{
+    padding: 0;
+    margin: 0;
+    font-size:1.4em !important;
+}
