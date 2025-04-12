@@ -6,7 +6,7 @@ import org.ocpsoft.rewrite.annotation.Join;
 
 @Named
 @RequestScoped
-@Join(path = "/init",to = "views/init.xhtml")
+@Join(path = "/cat",to = "views/catalogue.xhtml")
 public class InitilizerBean {
 
 }

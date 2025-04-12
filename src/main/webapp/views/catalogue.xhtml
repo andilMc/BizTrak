@@ -1,0 +1,51 @@
+<ui:composition
+        template="dash.xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="jakarta.faces.html"
+        xmlns:p="primefaces">
+    <ui:define name="content">
+        <div class="dashboard-bread dashboard-bread-2">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="breadcrumb-content">
+                            <div class="section-heading">
+                                <h2 class="sec__title font-size-30 text-white">
+                                    Catalogue
+                                </h2>
+                            </div>
+                        </div>
+                        <!-- end breadcrumb-content -->
+                    </div>
+                    <!-- end col-lg-6 -->
+                    <div class="col-lg-6">
+                        <div class="breadcrumb-list text-end">
+                            <ul class="list-items">
+                                <li><h:link outcome="index.html" styleClass="text-white">Home</h:link></li>
+                                <li>Pages</li>
+                                <li>Dashboard</li>
+                            </ul>
+                        </div>
+                        <!-- end breadcrumb-list -->
+                    </div>
+                    <!-- end col-lg-6 -->
+                </div>
+            </div>
+        </div>
+        <!-- end dashboard-bread -->
+        <div class="dashboard-main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">Welcome to the Catalogue!</h4>
+                            <p>This is a simple dashboard page.</p>
+                            <p:divider/>
+                            <p class="mb-0">You can customize this page as per your requirements.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
