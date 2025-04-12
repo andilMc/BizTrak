@@ -358,12 +358,34 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#{request.contextPath}/init">
-                            <i class="la la-database me-2"></i>
-                            Initialiseur
+		              <span class="side-menu-icon toggle-menu-icon">
+		                <i class="la la-angle-down"></i>
+		              </span>
+		              <a href="admin-dashboard-orders.html"><i class="las la-cog me-2"></i>Paramétre Initiaux</a>
+		              <ul class="toggle-drop-menu">
+		                <li>
+		                  <a href="admin-dashboard-orders-details.html">Catalogue et Famille</a>
+		                </li>
+		                <li>
+		                  <a href="admin-dashboard-orders-details.html">Unités de mesure</a>
+		                </li>
+		                <li>
+		                  <a href="admin-dashboard-orders-details.html">Type de Variation</a>
+		                </li>
+		              </ul>
+		            </li>
+					<li>
+                        <a href="#">
+                            <i class="las la-shield-alt me-2"></i>
+                            Role et Permission
                         </a>
                     </li>
-
+                    <li>
+                        <a href="#{request.contextPath}/init">
+                            <i class="las la-users-cog me-2"></i>
+                            Gestion des utilisateurs
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- end sidebar-menu-wrap -->
