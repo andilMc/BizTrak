@@ -1,4 +1,6 @@
-<ui:composition xmlns:h="jakarta.faces.html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition xmlns:h="jakarta.faces.html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="primefaces">
     <h:head>
         <ui:include src="includes/head.xhtml"/>
     </h:head>
@@ -6,7 +8,7 @@
         <ui:include src="includes/loader.xhtml"/>
         <div class="container h-100">
             <div class="row h-100 justify-content-center align-items-center pe-4 ps-4">
-                <div class="card col-lg-4 col-md-6 col-sm-8 shadow ">
+                <div class="card col-lg-4 col-md-6 col-ms-8 shadow ">
                     <div class="d-flex flex-column align-items-center pt-3">
                         <h:graphicImage styleClass="logo-login" value="#{resource['img/logo.png']}"/>
                         <h4 class="pt-1 font-weight-bold">BizTrak App</h4>
@@ -18,17 +20,20 @@
                                     <i class="la la-user la-norm"></i>
                                     <h:outputLabel styleClass="m-0 p-0" for="identifiant" value="Identifiant"/>
                                 </div>
-                                <h:inputText type="email" styleClass="form-control" id="identifiant" placeholder="example@example.example"/>
+                                <h:inputText value="#{loginBean.identifiant}" styleClass="form-control p-1" id="identifiant" placeholder="example@example.example"/>
                             </div>
                             <div class="form-group w-100">
                                 <div class="d-flex gap-2 align-items-center">
                                     <i class="la la-lock la-norm"></i>
                                     <h:outputLabel styleClass="m-0 p-0" for="password" value="Mot de passe"/>
                                 </div>
-                                <h:inputSecret id="password" styleClass="form-control"  />
+                                <h:inputSecret id="password" styleClass="form-control p-1"  />
                             </div>
                             <div class="form-group w-100 pt-2">
-                              <h:commandButton styleClass="btn btn-primary w-100 rounded-2" action="#{loginBean.lgoin}" value="Se Connecter" />
+                                <p:commandButton
+                                        action="#{loginBean.lgoin}"
+                                        styleClass="btn-primary p-0 w-100 rounded-2"
+                                        value="Se Connecter" />
                             </div>
 
                         </h:form>
