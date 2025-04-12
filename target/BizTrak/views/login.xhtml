@@ -1,4 +1,4 @@
-<ui:composition xmlns:h="jakarta.faces.html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition xmlns:h="jakarta.faces.html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="primefaces">
     <h:head>
         <ui:include src="includes/head.xhtml"/>
     </h:head>
@@ -18,17 +18,20 @@
                                     <i class="la la-user la-norm"></i>
                                     <h:outputLabel styleClass="m-0 p-0" for="identifiant" value="Identifiant"/>
                                 </div>
-                                <h:inputText type="email" styleClass="form-control" id="identifiant" placeholder="example@example.example"/>
+                                <h:inputText type="email" styleClass="form-control pt-1 pb-1" id="identifiant" placeholder="example@example.example"/>
                             </div>
                             <div class="form-group w-100">
                                 <div class="d-flex gap-2 align-items-center">
                                     <i class="la la-lock la-norm"></i>
                                     <h:outputLabel styleClass="m-0 p-0" for="password" value="Mot de passe"/>
                                 </div>
-                                <h:inputSecret id="password" styleClass="form-control"  />
+                                <h:inputSecret id="password" styleClass="form-control pt-1 pb-1"  />
                             </div>
-                            <div class="form-group w-100 pt-2">
-                              <h:commandButton styleClass="btn btn-primary w-100 rounded-2" action="#{loginBean.lgoin}" value="Se Connecter" />
+                            <div class="form-group w-100 pt-1">
+                              <p:commandButton
+                                      styleClass="btn-primary p-0 w-100 rounded-2"
+                                      action="#{loginBean.lgoin}"
+                                      value="Se Connecter" />
                             </div>
 
                         </h:form>
