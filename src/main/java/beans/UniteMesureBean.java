@@ -49,10 +49,8 @@ public class UniteMesureBean {
             uniteMesure.setDatecreation(LocalDate.now());
 
             if (unite.getId() != 0) {
-                System.out.println("update");
                 uniteDAO.update(uniteMesure);
             } else {
-                System.out.println("save");
                 uniteDAO.save(uniteMesure);
             }
 
@@ -64,7 +62,7 @@ public class UniteMesureBean {
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Failed to add unit of measure: " + e.getMessage()));
             unite.clear();
         }finally {
-//            unite.clear();
+            unite.clear();
         }
     }
 

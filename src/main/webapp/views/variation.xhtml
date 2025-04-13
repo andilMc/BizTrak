@@ -1,0 +1,168 @@
+<ui:composition
+        template="dash.xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="jakarta.faces.html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+        <div class="dashboard-bread dashboard-bread-2">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="breadcrumb-content">
+                            <div class="section-heading">
+                                <h2 class="sec__title font-size-30 text-white">
+                                    Types Des Variation
+                                </h2>
+                            </div>
+                        </div>
+                        <!-- end breadcrumb-content -->
+                    </div>
+                    <!-- end col-lg-6 -->
+                    <div class="col-lg-6">
+                        <div class="breadcrumb-list text-end">
+                            <ul class="list-items">
+                                <li><h:link outcome="/dash" styleClass="text-white">Tableau de Beaurd</h:link></li>
+                                <li>Types Des Variation</li>
+                            </ul>
+                        </div>
+                        <!-- end breadcrumb-list -->
+                    </div>
+                    <!-- end col-lg-6 -->
+                </div>
+            </div>
+        </div>
+        <!-- end dashboard-bread -->
+        <div class="dashboard-main-content">
+            <div class="container-fluid">
+                <div class="row mt-4 ">
+                    <div class="card p-3">
+                        <div class=" d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Liste des unites de mesure </h5>
+                            <div class="card-header-action">
+                                <h:link outcome="#"
+                                        onclick="$('#typeVarieteModal')[0].showModal();$('#addForm')[0].reset()"
+                                        styleClass="btn btn-primary d-flex align-items-center gap-2">
+                                    <h:outputText styleClass="la la-plus"/>
+                                    <h:outputText value="Nouveau Type"/>
+                                </h:link>
+
+                                <dialog class="col-lg-4 col-md-5 col-sm-12 col-12 mx-auto mt-5 p-3 rounded-2 border-0 shadow"
+                                        id="typeVarieteModal">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h4> Nouvelle Unite </h4>
+                                        <h:link outcome="#"
+                                                onclick="$('#typeVarieteModal')[0].close();$('#addForm')[0].reset()"
+                                                styleClass="btn btn-outline-primary rounded-pill p-1 ">
+                                            <h:outputText styleClass="la la-times"/>
+                                        </h:link>
+                                    </div>
+                                    <p:divider/>
+                                    <h:form id="addForm"  styleClass="px-3">
+                                        <h:inputHidden value="#{typeVariationBean.typeVariation.id}"/>
+                                        <div class="form-group">
+                                            <h:outputLabel for="label" styleClass="d-flex align-items-center gap-2" >
+                                                <h:outputText styleClass="la la-tag la-norm"/>
+                                                <h:outputText value="Libelle" />
+                                            </h:outputLabel>
+                                            <h:inputText id="label" label="Label" styleClass="form-control p-1" value="#{typeVariationBean.typeVariation.label}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel for="contentType" styleClass="d-flex align-items-center gap-2" >
+                                                <h:outputText styleClass="pi pi-hashtag"/>
+                                                <h:outputText value="Type du champ" />
+                                            </h:outputLabel>
+                                           <h:selectOneMenu id="contentType" styleClass="form-select" value="#{typeVariationBean.typeVariation.typevaleur}">
+                                               <f:selectItems value="#{typeVariationBean.types}"
+                                                              var="type"
+                                                              itemValue="#{type.toString()}"
+                                                              itemLabel="#{type.toString()}"/>
+                                           </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group d-flex align-items-center gap-2">
+                                            <h:outputLabel for="active" styleClass="d-flex align-items-center gap-2 form-check-label p-0 m-0">
+                                                <h:outputText styleClass="la la-check-double la-norm p-0 m-0 d-flex align-items-center"/>
+                                                <h:outputText value="Active" />
+                                            </h:outputLabel>
+                                            <h:selectBooleanCheckbox  id="active"
+                                                                      styleClass="form-control form-check-input"
+                                                                      value="#{typeVariationBean.typeVariation.statut}"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <p:commandButton
+                                                    onclick="$('#typeVarieteModal')[0].close()"
+                                                    update="tvList"
+                                                    process="@form"
+                                                    value="Enregistrer"
+                                                    action="#{typeVariationBean.addTypeVariation()}"
+                                                    styleClass="btn-primary p-0 w-100"/>
+                                        </div>
+
+                                    </h:form>
+
+                                </dialog>
+
+                            </div>
+                        </div>
+                        <p:divider/>
+                        <div class="card-body p-2">
+                            <p:dataTable id="tvList" var="tv" value="#{typeVariationBean.typeVariations}" styleClass="table table-striped">
+                                <p:column headerText="Label">
+                                    <h:outputText value="#{tv.label}"/>
+                                </p:column>
+                                <p:column headerText="Type de Champ">
+                                    <h:outputText value="#{tv.typevaleur}"/>
+                                </p:column>
+                                <p:column headerText="Etat">
+                                    <h:outputText value="#{tv.statut}"/>
+                                </p:column>
+                                <p:column headerText="Actions" styleClass="d-flex justify-content-center gap-2 align-items-center">
+                                    <p:commandButton icon="la la-edit"
+                                                     action="#{typeVariationBean.initTvVal(tv.id)}"
+                                                     onclick="$('#typeVarieteModal')[0].showModal()"
+                                                     update=":addForm"
+                                                     styleClass="rounded-button ui-button-primary ui-button-outlined "/>
+                                    <p:commandButton
+                                            icon="la la-trash"
+                                            onclick="$('#deleteType#{tv.id}')[0].showModal()"
+                                            styleClass="rounded-button ui-button-danger ui-button-outlined "/>
+
+                                    <dialog class="col-lg-4 col-md-5 col-sm-12 col-12 mx-auto mt-5 p-3 rounded-2 border-0 shadow"
+                                            id="deleteType#{tv.id}"
+                                            style="outline: none;">
+                                        <h:form styleClass="px-3">
+                                            <div class="d-flex justify-content-center align-items-center flex-column gap-3">
+                                                <h:outputText styleClass="pi pi-exclamation-triangle text-color-10"
+                                                              style="font-size: 100px!important;"/>
+                                                <h:outputText styleClass="font-size-20 text-center"
+                                                              value="Etes-vous sur de vouloir supprimer ce Type de Variation ?"/>
+                                            </div>
+                                            <div class="form-group d-flex justify-content-center gap-3 mt-3">
+                                                <p:commandButton
+                                                        onclick="$('#deleteType#{tv.id}')[0].close()"
+                                                        update="tvList"
+                                                        process="@form"
+                                                        value="Confirmer"
+                                                        action="#{typeVariationBean.deleteTypevariete(tv.id)}"
+                                                        styleClass="ui-button-danger p-0 rounded-2"/>
+                                                <h:link outcome="#"
+                                                        onclick="$('#deleteType#{tv.id}')[0].close()"
+                                                        value="Annuler"
+                                                        styleClass="btn btn-outline-primary rounded-2"/>
+                                            </div>
+                                        </h:form>
+                                    </dialog>
+
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>
