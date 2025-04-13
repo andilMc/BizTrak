@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/stock</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <mapping class="models.Article"/>
+        <mapping class="models.Catalogue"/>
+        <mapping class="models.Famille"/>
+        <mapping class="models.Produit"/>
+        <mapping class="models.Unitemesure"/>
+        <mapping class="models.Typevariete"/>
+        <mapping class="models.Variete"/>
+        <mapping class="models.Stock"/>
+        <mapping class="models.Image"/>
+        <mapping class="models.Detailsproduit"/>
+        <mapping class="models.Lot"/>
+        <mapping class="models.Referencearticle"/>
+
+    </session-factory>
+</hibernate-configuration>
