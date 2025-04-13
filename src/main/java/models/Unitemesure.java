@@ -20,8 +20,8 @@ public class Unitemesure {
     private String label;
 
     @Size(max = 254)
-    @Column(name = "typevaleur", length = 254)
-    private String typevaleur;
+    @Column(name = "symbole", length = 254)
+    private String symbole;
 
     @Column(name = "statut")
     private Boolean statut;
@@ -48,14 +48,6 @@ public class Unitemesure {
         this.label = label;
     }
 
-    public String getTypevaleur() {
-        return typevaleur;
-    }
-
-    public void setTypevaleur(String typevaleur) {
-        this.typevaleur = typevaleur;
-    }
-
     public Boolean getStatut() {
         return statut;
     }
@@ -80,4 +72,11 @@ public class Unitemesure {
         this.produits = produits;
     }
 
+    public String getSymbole() {
+        return symbole;
+    }
+
+    public void setSymbole(String symbole) {
+        this.symbole = symbole;
+    }
 }

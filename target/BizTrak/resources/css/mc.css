@@ -12,3 +12,7 @@ body{
     margin: 0;
     font-size:1.4em !important;
 }
+
+dialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}

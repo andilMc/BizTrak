@@ -1,5 +1,6 @@
 package models.DTO;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
 import javax.validation.constraints.Size;
@@ -11,36 +12,39 @@ import java.util.Objects;
  */
 @Named
 public class UnitemesureDto implements Serializable {
-    private Integer id;
-    @Size(max = 254)
-    private  String label;
-    @Size(max = 254)
-    private  String typevaleur;
-    private  Boolean statut;
-    public UnitemesureDto() {}
-    public UnitemesureDto(Integer id, String label, String typevaleur, Boolean statut) {
-        this.id = id;
-        this.label = label;
-        this.typevaleur = typevaleur;
-        this.statut = statut;
-    }
+	
+  private int id;
+  @Size(max = 254)
+  private String label;
 
-    public Integer getId() {
-        return id;
-    }
+  @Size(max = 254)
+  private String symbole;
+  private Boolean statut = true;
 
-    public String getLabel() {
-        return label;
-    }
 
-    public String getTypevaleur() {
-        return typevaleur;
-    }
+  public int getId() {
+      return id;
+  }
 
-    public Boolean getStatut() {
-        return statut;
-    }
+  public void setId(int id) {
+      this.id = id;
+  }
 
+  public String getLabel() {
+      return label;
+  }
+
+  public void setLabel(String label) {
+      this.label = label;
+  }
+
+  public Boolean getStatut() {
+      return statut;
+  }
+
+  public void setStatut(Boolean statut) {
+      this.statut = statut;
+  }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,13 +52,12 @@ public class UnitemesureDto implements Serializable {
         UnitemesureDto entity = (UnitemesureDto) o;
         return Objects.equals(this.id, entity.id) &&
                 Objects.equals(this.label, entity.label) &&
-                Objects.equals(this.typevaleur, entity.typevaleur) &&
                 Objects.equals(this.statut, entity.statut);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, label, typevaleur, statut);
+        return Objects.hash(id, label, statut);
     }
 
     @Override
@@ -62,7 +65,21 @@ public class UnitemesureDto implements Serializable {
         return getClass().getSimpleName() + "(" +
                 "id = " + id + ", " +
                 "label = " + label + ", " +
-                "typevaleur = " + typevaleur + ", " +
                 "statut = " + statut + ")";
+    }
+
+    public String getSymbole() {
+        return symbole;
+    }
+
+    public void setSymbole(String symbole) {
+        this.symbole = symbole;
+    }
+
+    public void clear() {
+        this.id = 0;
+        this.label = null;
+        this.statut = true;
+        this.symbole = null;
     }
 }

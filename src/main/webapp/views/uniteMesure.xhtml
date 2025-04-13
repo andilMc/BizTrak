@@ -2,7 +2,8 @@
         template="dash.xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="jakarta.faces.html"
-        xmlns:p="primefaces" xmlns:f="http://java.sun.com/jsf/core">
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="content">
         <div class="dashboard-bread dashboard-bread-2">
             <div class="container-fluid">
@@ -40,44 +41,63 @@
                             <h5 class="mb-0">Liste des unites de mesure </h5>
                             <div class="card-header-action">
                                 <h:link outcome="#"
-                                        onclick="$('#addUniteMesureForm')[0].showModal()"
+                                        onclick="$('#addUniteMesureForm')[0].showModal();$('#addUniteForm')[0].reset()"
                                         styleClass="btn btn-primary d-flex align-items-center gap-2">
                                     <h:outputText styleClass="la la-plus"/>
                                     <h:outputText value="Ajouter"/>
                                 </h:link>
-                               <dialog class="col-md-8 col-lg-6 col-sm-12 col-12 mx-auto mt-5 p-2 rounded-2 border-0 shadow"
-                                        id="addUniteMesureForm" style="outline: none;">
+                            
+                               <dialog class="col-lg-4 col-md-5 col-sm-12 col-12 mx-auto mt-5 p-3 rounded-2 border-0 shadow"
+                                        id="addUniteMesureForm">
                                     <div class="d-flex align-items-center justify-content-between">
                                        <h4> Nouvelle Unite </h4>
                                         <h:link outcome="#"
-                                                onclick="$('#addUniteMesureForm')[0].close()"
+                                                onclick="$('#addUniteMesureForm')[0].close();$('#addUniteForm')[0].reset()"
                                                 styleClass="btn btn-outline-primary rounded-pill p-1 ">
                                             <h:outputText styleClass="la la-times"/>
                                         </h:link>
                                     </div>
                                    <p:divider/>
-                                        <h:form id="addUniteForm">
-                                            <div class="form-group">
-                                                <h:inputText styleClass="form-control" title="Label" />
+											<h:form id="addUniteForm"  styleClass="px-3">
+												<h:inputHidden value="#{uniteMesureBean.unite.id}"/>
+                                                <div class="form-group">
+                                                <h:outputLabel for="label" styleClass="d-flex align-items-center gap-2" >
+                                                    <h:outputText styleClass="la la-tag la-norm"/>
+                                                    <h:outputText value="Libelle" />
+                                                </h:outputLabel>
+                                                <h:inputText id="label" label="Label" styleClass="form-control p-1" value="#{uniteMesureBean.unite.label}" />
                                             </div>
                                             <div class="form-group">
-                                                <h:selectOneMenu styleClass="form-control form-select">
-                                                    <f:selectItem itemLabel="Entier" itemValue=""/>
-                                                    <f:selectItem itemLabel="Decimale" itemValue=""/>
-                                                </h:selectOneMenu>
+                                                <h:outputLabel for="symbole" styleClass="d-flex align-items-center gap-2" >
+                                                    <h:outputText styleClass="pi pi-hashtag"/>
+                                                    <h:outputText value="Symbole" />
+                                                </h:outputLabel>
+                                                <h:inputText id="symbole"  styleClass="form-control p-1" value="#{uniteMesureBean.unite.symbole}" />
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group d-flex align-items-center gap-2">
+                                                <h:outputLabel for="active" styleClass="d-flex align-items-center gap-2 form-check-label p-0 m-0">
+                                                    <h:outputText styleClass="la la-check-double la-norm p-0 m-0 d-flex align-items-center"/>
+                                                    <h:outputText value="Active" />
+                                                </h:outputLabel>
+                                                <h:selectBooleanCheckbox  id="active"
+                                                                         styleClass="form-control form-check-input"
+                                                                         value="#{uniteMesureBean.unite.statut}"/>
+                                            </div>
 
-                                            <h:selectBooleanCheckbox styleClass="form-control form-check-input"/>
-                                            </div>
                                             <div class="form-group">
-                                                <p:commandButton value="Ajouter"
-                                                                 styleClass="btn-primary p-0"/>
-                                            </div>
-                                        </h:form>
-
+                                                <p:commandButton
+                                                        onclick="$('#addUniteMesureForm')[0].close()"
+                                                        update="uniteMesureTable"
+                                                        process="@form"
+                                                        value="Enregistrer"
+                                                         action="#{uniteMesureBean.addUnite}"
+                                                         styleClass="btn-primary p-0 w-100"/>
+                                            </div>                                        
+                                
+										</h:form>
+                   
                                 </dialog>
-
+					
                             </div>
                         </div>
                         <p:divider/>
@@ -86,21 +106,49 @@
                                 <p:column headerText="Label">
                                     <h:outputText value="#{unite.label}"/>
                                 </p:column>
-                                <p:column headerText="Type de Valeur">
-                                    <h:outputText value="#{unite.typevaleur}"/>
+                                <p:column headerText="Symbole">
+                                    <h:outputText value="#{unite.symbole}"/>
                                 </p:column>
                                 <p:column headerText="Etat">
                                     <h:outputText value="#{unite.statut}"/>
                                 </p:column>
                                 <p:column headerText="Actions" styleClass="d-flex justify-content-center gap-2 align-items-center">
+                                    <p:commandButton icon="la la-edit"
+                                                     action="#{uniteMesureBean.initUniteVal(unite.id)}"
+                                                     onclick="$('#addUniteMesureForm')[0].showModal()"
+                                                     update=":addUniteForm"
+                                                     styleClass="rounded-button ui-button-primary ui-button-outlined p-1"/>
                                     <h:link outcome="#"
-                                            styleClass="btn btn-outline-primary rounded-pill p-1 ">
-                                        <h:outputText styleClass="la la-edit"/>
-                                    </h:link>
-                                    <h:link outcome="#"
+                                            onclick="$('#deleteUnite#{unite.id}')[0].showModal()"
                                             styleClass="btn btn-outline-danger rounded-pill p-1 ">
                                         <h:outputText styleClass="la la-trash"/>
                                     </h:link>
+                                    <dialog class="col-lg-4 col-md-5 col-sm-12 col-12 mx-auto mt-5 p-3 rounded-2 border-0 shadow"
+                                            id="deleteUnite#{unite.id}"
+                                            style="outline: none;">
+                                        <h:form styleClass="px-3">
+                                            <div class="d-flex justify-content-center align-items-center flex-column gap-3">
+                                                <h:outputText styleClass="pi pi-exclamation-triangle text-color-10"
+                                                              style="font-size: 100px!important;"/>
+                                                <h:outputText styleClass="font-size-20 text-center"
+                                                              value="Etes-vous sur de vouloir supprimer cette unite de mesure ?"/>
+                                            </div>
+                                            <div class="form-group d-flex justify-content-center gap-3 mt-3">
+                                                <p:commandButton
+                                                        onclick="$('#deleteUnite#{unite.id}')[0].close()"
+                                                        update="uniteMesureTable"
+                                                        process="@form"
+                                                        value="Confirmer"
+                                                        action="#{uniteMesureBean.deleteUnite(unite.id)}"
+                                                        styleClass="ui-button-danger p-0 rounded-2"/>
+                                                <h:link outcome="#"
+                                                        onclick="$('#deleteUnite#{unite.id}')[0].close()"
+                                                        value="Annuler"
+                                                        styleClass="btn btn-outline-primary rounded-2"/>
+                                            </div>
+                                        </h:form>
+                                    </dialog>
+
                                 </p:column>
                             </p:dataTable>
                         </div>
