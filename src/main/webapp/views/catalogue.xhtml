@@ -2,7 +2,8 @@
         template="dash.xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="jakarta.faces.html"
-        xmlns:p="primefaces">
+        xmlns:p="primefaces"
+        xmlns:f="jakarta.faces.core">
     <ui:define name="content">
         <div class="dashboard-bread dashboard-bread-2">
             <div class="container-fluid">
@@ -40,41 +41,109 @@
                 <div class="form-box">
                   <div class="form-title-wrap">
                     <h3 class="title">Liste des Catalogue</h3>
-                    <p class="font-size-14">Showing 1 to 8 of 30 results</p>
                   </div>
                   <!-- button ajout catalogue -->
                   <div class="row align-items-center">
 					  <div class="col-3" style="margin-left:20px; margin-right:20px;">
 					    <input class="form-control" type="text" placeholder="Catalogue"></input>
 					  </div>
-					  <div class="col-auto ms-auto" style="margin-left:20px; margin-right:20px;">
-					    <a href="become-local-expert.html" class="theme-btn">Ajouter un Categorie</a>
-					  </div>
-				</div>
+					  <h:link outcome="#" class="theme-btn col-auto ms-auto"
+                                        onclick="$('#addUniteMesureForm')[0].showModal()"
+                                        styleClass="btn btn-primary d-flex align-items-center gap-2" style="margin-left:40px; margin-right:40px;">
+                                    <h:outputText styleClass="la la-plus"/>
+                                    <h:outputText class="col-auto ms-auto" value="Ajouter"/>
+                                </h:link>
+					  <div class="card-header-action">
+                               <dialog class="col-md-8 col-lg-6 col-sm-12 col-12 mx-auto mt-5 p-2 rounded-2 border-0 shadow"
+                                        id="addUniteMesureForm" style="outline: none;">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                       <h4> Nouvelle Catalogue </h4>
+                                        <h:link outcome="#"
+                                                onclick="$('#addUniteMesureForm')[0].close()"
+                                                styleClass="btn btn-outline-primary rounded-pill p-1 ">
+                                            <h:outputText styleClass="la la-times"/>
+                                        </h:link>
+                                    </div>
+                                   <p:divider/>
+                                        <h:form id="addCatalogueForm">
+										    <h:outputLabel for="nomCatalogue">
+										        <span class="la la-tag" style="margin-right:5px;"></span>
+										        Nom du Catalogue
+										    </h:outputLabel>
+										    <div class="form-group">
+										        <h:inputText id="nomCatalogue" value="#{catalogueBean.newCatalogue.label}" styleClass="form-control"
+										                     title="Nom du catalogue" placeholder="Nom Catalogue" required="true" />
+										    </div>
+										
+										    <h:outputLabel for="description">
+										        <span class="la la-comment" style="margin-right:5px;"></span>
+										        Description
+										    </h:outputLabel>
+										    <div class="form-group">
+										        <h:inputTextarea id="description" value="#{catalogueBean.newCatalogue.description}" styleClass="form-control"
+										                         title="Description" placeholder="Description" required="true" />
+										    </div>
+										
+										    <div class="form-group">
+										        <p:commandButton value="Ajouter"
+										                         action="#{catalogueBean.addCatalogue}"
+										                         update="@form"
+										                         styleClass="btn-primary p-0"
+										                         attribut="#listCatalogue"/>
+										    </div>
+										</h:form>
+                                </dialog>
+                            </div>					  
+				</div> 				
                   <!-- fin button ajout catalogue -->
-                  <div class="form-content">
-                    <div class="table-form table-responsive">                    
-                       <p:dataTable value="#{currencyBean.currencyList}" var="currency" responsiveLayout="scroll"
-						              rows="10" styleClass="table" rowIndexVar="idx">
-						    <p:column headerText="Reference">
-						        <h:outputText value="#{idx + 1}" />
-						    </p:column>
-						    <p:column headerText="Categories">
-						        <h:outputText value="#{currency.country}" />
-						    </p:column>
-						    <p:column headerText="Action">
-						        <p:commandButton icon="pi pi-pencil" title="Edit" styleClass="rounded-button ui-button-warning" action="#{currencyBean.edit(currency)}" />
-						    </p:column>
-						</p:dataTable>
-                    </div>
-                  </div>
+                  <h:form>
+				    <div class="form-content">
+				        <div class="table-form table-responsive">                    
+				            <p:dataTable id="listCatalogue" 
+							             value="#{catalogueBean.catalogueList}" 
+							             var="cat" 
+							             rowIndexVar="idx"
+							             paginator="true" 
+							             rows="8" 
+							             responsiveLayout="scroll" 
+							             styleClass="table">
+							
+							    <p:column headerText="Référence">
+							        <h:outputText value="#{cat.reference}" />
+							    </p:column>
+							
+							    <p:column headerText="Libellé">
+							        <h:outputText value="#{cat.label}" />
+							    </p:column>
+							
+							    <p:column headerText="Action">
+							        <p:commandButton icon="pi pi-pencil"
+							                         title="Modifier"
+							                         action="#{catalogueBean.edit(cat)}"
+							                         styleClass="rounded-button ui-button-primary ui-button-sm"
+							                         style="margin-right:5px;" />
+							
+							        <!-- <p:commandButton icon="pi pi-trash"
+							                         title="Supprimer"
+							                         action="#{catalogueBean.delete(cat)}"
+							                         styleClass="rounded-button ui-button-danger ui-button-sm" />  -->
+							        <p:commandButton icon="pi pi-trash"
+						                 title="Supprimer"
+						                 action="#{catalogueBean.delete(cat)}"
+						                 update="listCatalogue"
+						                 process="@this"
+						                 styleClass="rounded-button ui-button-danger ui-button-sm" />
+							    </p:column>
+							</p:dataTable>
+				        </div>
+				    </div>
+				</h:form>
                 </div>
                 <!-- end form-box -->
               </div>
               <!-- end col-lg-12 -->
             </div>
             <!-- end row -->
-            
             <!-- pagination -->
             <div class="row">
               <div class="col-lg-12">
