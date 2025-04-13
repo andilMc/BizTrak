@@ -8,4 +8,5 @@ import org.ocpsoft.rewrite.annotation.Join;
 @RequestScoped
 @Join(path = "/dash", to = "views/dash.xhtml")
 public class DashBean {
+	
 }
