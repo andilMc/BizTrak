@@ -1,6 +1,8 @@
 package beans;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import models.Catalogue;
@@ -57,12 +59,27 @@ public class CatalogueBean {
 	        newCatalogue = new Catalogue();
 	    } 
 	    
-	    public void delete(Catalogue cat) {
-	        if (cat != null && cat.getId() != 0) {
-	            dao.delete(cat);
+	    public void deleteCatalogue(int id) {
+	        try {
+	            GenericDAO<Catalogue> catDAO = new GenericDAO<>(Catalogue.class);
+	            Catalogue cat = catDAO.findById(id);
+	            if (cat != null) {
+	                catDAO.delete(cat);
+	                FacesContext.getCurrentInstance().addMessage(null,
+	                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Succès", "Catalogue supprimé avec succès."));
+	            } else {
+	                FacesContext.getCurrentInstance().addMessage(null,
+	                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Catalogue introuvable."));
+	            }
+	        } catch (Exception e) {
+	            FacesContext.getCurrentInstance().addMessage(null,
+	                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Échec de suppression du catalogue : " + e.getMessage()));
 	        }
 	    }
-	    
+
+
+	
+
 	    
 
 }
