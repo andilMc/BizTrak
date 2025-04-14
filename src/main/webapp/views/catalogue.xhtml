@@ -44,9 +44,9 @@
                   </div>
                   <!-- button ajout catalogue -->
                   <div class="row align-items-center">
-					  <div class="col-3" style="margin-left:20px; margin-right:20px;">
+					 <!--  <div class="col-3" style="margin-left:20px; margin-right:20px;">
 					    <input class="form-control" type="text" placeholder="Catalogue"></input>
-					  </div>
+					  </div> -->
 					  <h:link outcome="#" class="theme-btn col-auto ms-auto"
                                         onclick="$('#addUniteMesureForm')[0].showModal()"
                                         styleClass="btn btn-primary d-flex align-items-center gap-2" style="margin-left:40px; margin-right:40px;">
@@ -122,17 +122,12 @@
 							                         action="#{catalogueBean.edit(cat)}"
 							                         styleClass="rounded-button ui-button-primary ui-button-sm"
 							                         style="margin-right:5px;" />
-							
-							        <!-- <p:commandButton icon="pi pi-trash"
-							                         title="Supprimer"
-							                         action="#{catalogueBean.delete(cat)}"
-							                         styleClass="rounded-button ui-button-danger ui-button-sm" />  -->
-							        <p:commandButton icon="pi pi-trash"
-						                 title="Supprimer"
-						                 action="#{catalogueBean.delete(cat)}"
-						                 update="listCatalogue"
-						                 process="@this"
-						                 styleClass="rounded-button ui-button-danger ui-button-sm" />
+									<p:commandButton icon="pi pi-trash"
+							                 title="Supprimer"
+							                 action="#{catalogueBean.deleteCatalogue(cat.id)}"
+							                 update="@form"
+							                 styleClass="rounded-button ui-button-danger ui-button-sm"
+							                 style="margin-right:5px;" /> 
 							    </p:column>
 							</p:dataTable>
 				        </div>
@@ -144,44 +139,14 @@
               <!-- end col-lg-12 -->
             </div>
             <!-- end row -->
-            <!-- pagination -->
-            <div class="row">
-              <div class="col-lg-12">
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination">
-                    <li class="page-item">
-                      <a class="page-link page-link-nav" href="#" aria-label="Previous">
-                        <span aria-hidden="true"><i class="la la-angle-left"></i></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link page-link-nav" href="#">1</a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link page-link-nav" href="#">2 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link page-link-nav" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link page-link-nav" href="#" aria-label="Next">
-                        <span aria-hidden="true"><i class="la la-angle-right"></i></span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-            <!-- fin pagination -->
+            
             
           </div>
           <!-- end container-fluid -->
         </div>
         
         <!-- Liste famille -->
-         <div class="dashboard-main-content">
+         <div class="dashboard-main-content" id="listFamille">
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-12">
