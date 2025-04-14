@@ -118,11 +118,11 @@
                                                      onclick="$('#addUniteMesureForm')[0].showModal()"
                                                      update=":addUniteForm"
                                                      styleClass="rounded-button ui-button-primary ui-button-outlined p-1"/>
-                                    <h:link outcome="#"
+                                    <p:commandButton
+                                            icon="la la-trash"
                                             onclick="$('#deleteUnite#{unite.id}')[0].showModal()"
-                                            styleClass="btn btn-outline-danger rounded-pill p-1 ">
-                                        <h:outputText styleClass="la la-trash"/>
-                                    </h:link>
+                                            styleClass="rounded-button ui-button-danger ui-button-outlined "/>
+
                                     <dialog class="col-lg-4 col-md-5 col-sm-12 col-12 mx-auto mt-5 p-3 rounded-2 border-0 shadow"
                                             id="deleteUnite#{unite.id}"
                                             style="outline: none;">

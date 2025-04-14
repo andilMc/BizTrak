@@ -1,0 +1,139 @@
+<ui:composition
+        template="dash.xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="jakarta.faces.html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+        <div class="dashboard-bread dashboard-bread-2">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="breadcrumb-content">
+                            <div class="section-heading">
+                                <h2 class="sec__title font-size-30 text-white">
+                                    Vos Produits
+                                </h2>
+                            </div>
+                        </div>
+                        <!-- end breadcrumb-content -->
+                    </div>
+                    <!-- end col-lg-6 -->
+                    <div class="col-lg-6">
+                        <div class="breadcrumb-list text-end">
+                            <ul class="list-items">
+                                <li><h:link outcome="/dash" styleClass="text-white">Tableau de Beaurd</h:link></li>
+                                <li>Liste Des Produits</li>
+                            </ul>
+                        </div>
+                        <!-- end breadcrumb-list -->
+                    </div>
+                    <!-- end col-lg-6 -->
+                </div>
+            </div>
+        </div>
+        <!-- end dashboard-bread -->
+        <div class="dashboard-main-content">
+            <div class="container-fluid">
+                <div class="row mt-4 ">
+                    <div class="card p-3 border-0">
+                        <div class=" d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Liste Des Produits </h5>
+                            <div class="card-header-action">
+                                <p:commandButton
+                                        iconPos="left"
+                                        icon="pi pi-plus"
+                                        value="Nouveau Produit"
+                                        styleClass="rounded-2 p-0"
+                                        onclick="$('#typeVarieteModal')[0].showModal();$('#addForm')[0].reset()"
+                                        />
+
+                                <dialog class="col-lg-4 col-md-5 col-sm-12 col-12 mx-auto mt-5 p-3 rounded-2 border-0 shadow"
+                                        id="typeVarieteModal">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h4> #### </h4>
+                                        <h:link outcome="#"
+                                                onclick="$('#typeVarieteModal')[0].close();$('#addForm')[0].reset()"
+                                                styleClass="btn btn-outline-primary rounded-pill p-1 ">
+                                            <h:outputText styleClass="la la-times"/>
+                                        </h:link>
+                                    </div>
+                                    <p:divider/>
+                                    <h:form id="addForm"  styleClass="px-3">
+                                        <h:inputHidden value="#{typeVariationBean.typeVariation.id}"/>
+                                        <div class="form-group">
+                                            <h:outputLabel for="label" styleClass="d-flex align-items-center gap-2" >
+                                                <h:outputText styleClass="la la-tag la-norm"/>
+                                                <h:outputText value="Libelle" />
+                                            </h:outputLabel>
+                                            <h:inputText id="label" label="Label" styleClass="form-control p-1" value="#{typeVariationBean.typeVariation.label}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel for="contentType" styleClass="d-flex align-items-center gap-2" >
+                                                <h:outputText styleClass="pi pi-hashtag"/>
+                                                <h:outputText value="Type du champ" />
+                                            </h:outputLabel>
+                                            <h:selectOneMenu id="contentType" styleClass="form-select" value="#{typeVariationBean.typeVariation.typevaleur}">
+                                                <f:selectItems value="#{typeVariationBean.types}"
+                                                               var="type"
+                                                               itemValue="#{type.toString()}"
+                                                               itemLabel="#{type.toString()}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group d-flex align-items-center gap-2">
+                                            <h:outputLabel for="active" styleClass="d-flex align-items-center gap-2 form-check-label p-0 m-0">
+                                                <h:outputText styleClass="la la-check-double la-norm p-0 m-0 d-flex align-items-center"/>
+                                                <h:outputText value="Active" />
+                                            </h:outputLabel>
+                                            <h:selectBooleanCheckbox  id="active"
+                                                                      styleClass="form-control form-check-input"
+                                                                      value="#{typeVariationBean.typeVariation.statut}"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <p:commandButton
+                                                    onclick="$('#typeVarieteModal')[0].close()"
+                                                    process="@form"
+                                                    value="Enregistrer"
+                                                    action="#{typeVariationBean.addTypeVariation()}"
+                                                    styleClass="btn-primary p-0 w-100"/>
+                                        </div>
+
+                                    </h:form>
+
+                                </dialog>
+
+                            </div>
+                        </div>
+                        <p:divider/>
+                        <div class="card-body">
+                            <p:dataTable paginator="true"
+                                         rows="6"
+                                         paginatorPosition="bottom"
+                                         value="#{productBean.products}"
+                                         var="product">
+                                <p:column headerText="Designation" styleClass="text-center">
+                                    <h:outputText value="#{product.designation}"/>
+                                </p:column>
+                                <p:column headerText="Prix" styleClass="text-center">
+                                    <h:outputText value="#{product.prixunite}"/>
+                                </p:column>
+                                <p:column headerText="Quantite" styleClass="text-center">
+                                    <h:outputText value="#{productBean.getQuantite(product.id)}"/>
+                                </p:column>
+                                <p:column headerText="Actions" >
+
+                                </p:column>
+
+                            </p:dataTable>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
