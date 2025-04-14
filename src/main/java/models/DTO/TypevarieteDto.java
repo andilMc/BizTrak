@@ -1,5 +1,7 @@
 package models.DTO;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import models.Typevariete;
 
 import javax.validation.constraints.Size;
@@ -10,6 +12,7 @@ import java.util.Objects;
 /**
  * DTO for {@link Typevariete}
  */
+@Named
 public class TypevarieteDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
